@@ -1,13 +1,14 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, type ViewStyle } from 'react-native'
 
 interface Props {
-  children: string
+  children: JSX.Element
+  style?: ViewStyle
 }
 
 const CicreButton = (props: Props): JSX.Element => {
-  const { children } = props
+  const { children, style } = props
   return (
-    <View style={styles.cicreButton}>
+    <View style={[styles.cicreButton, style]}>
       <Text style={styles.cicreButtonLabel}>{children}</Text>
     </View>
   )
