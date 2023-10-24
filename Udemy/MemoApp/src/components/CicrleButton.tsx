@@ -1,4 +1,7 @@
-import { View, Text, StyleSheet, type ViewStyle } from 'react-native'
+import {
+  Text, StyleSheet, TouchableOpacity,
+  type ViewStyle
+} from 'react-native'
 
 interface Props {
   children: JSX.Element
@@ -8,9 +11,9 @@ interface Props {
 const CicreButton = (props: Props): JSX.Element => {
   const { children, style } = props
   return (
-    <View style={[styles.cicreButton, style]}>
+    <TouchableOpacity style={[styles.cicreButton, style]}>
       <Text style={styles.cicreButtonLabel}>{children}</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 
