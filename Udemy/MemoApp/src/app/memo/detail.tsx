@@ -1,13 +1,16 @@
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { router } from 'expo-router'
 
-import Header from '../../components/Header'
 import CicreButton from '../../components/CicrleButton'
 import Icon from '../../components/Icon'
+
+const handlePress = (): void => {
+  router.push('/memo/edit')
+}
 
 const Detail = (): JSX.Element => {
   return (
     <View style= {styles.container}>
-      <Header />
       <View style= {styles.memoHeader}>
         <Text style= {styles.memoTitle}>買い物リスト</Text>
         <Text style= {styles.memoDate}>2023年10月1日 10:00</Text>
@@ -20,7 +23,7 @@ const Detail = (): JSX.Element => {
         おかずで何か食べたいものをお惣菜で
         </Text>
       </ScrollView>
-      <CicreButton style={{ top: 160, bottom: 'auto' }}>
+      <CicreButton onPress={handlePress} style={{ top: 60, bottom: 'auto' }}>
       <Icon name= 'pencil' size={40} color='#ffffff'/>
       </CicreButton>
     </View>

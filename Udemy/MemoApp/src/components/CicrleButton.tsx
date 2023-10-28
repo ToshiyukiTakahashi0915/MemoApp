@@ -6,12 +6,13 @@ import {
 interface Props {
   children: JSX.Element
   style?: ViewStyle
+  onPress?: () => void
 }
 
 const CicreButton = (props: Props): JSX.Element => {
-  const { children, style } = props
+  const { children, style, onPress } = props
   return (
-    <TouchableOpacity style={[styles.cicreButton, style]}>
+    <TouchableOpacity onPress={onPress} style={[styles.cicreButton, style]}>
       <Text style={styles.cicreButtonLabel}>{children}</Text>
     </TouchableOpacity>
   )
