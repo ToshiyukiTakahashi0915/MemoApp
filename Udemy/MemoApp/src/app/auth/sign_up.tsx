@@ -1,15 +1,28 @@
 import {
-  View, Text, TextInput, TouchableOpacity, StyleSheet
+  View, Text, TextInput, Alert,
+  TouchableOpacity, StyleSheet
 } from 'react-native'
 
 import { Link, router } from 'expo-router'
 import { useState } from 'react'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
+import { auth } from '../../config'
 import Button from '../../components/button'
 
-const handlePless = (): void => {
+const handlePless = (email: string, password: string): void => {
   // 会員登録
-  router.push('/memo/list')
+  console.log(email, password)
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log(userCredential.user.uid)
+      router.replace('/memo/list')
+    })
+    .catch((error) => {
+      const { code, message } = error
+      console.log(code, message)
+      Alert.alert(message)
+    })
 }
 
 const SighUp = (): JSX.Element => {
@@ -37,10 +50,10 @@ const SighUp = (): JSX.Element => {
         placeholder='Password'
         textContentType='password'
         />
-        <Button label='Submit' onPress={handlePless} />
+        <Button label='Submit' onPress={() => { handlePless(email, password) } } />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registered?</Text>
-          <Link href='/auth/log_in' asChild>
+          <Link href='/auth/log_in' asChild replace>
             <TouchableOpacity>
               <Text style={styles.footerLink}>Log in.</Text>
             </TouchableOpacity>
